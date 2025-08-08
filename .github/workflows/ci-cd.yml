@@ -29,12 +29,10 @@ jobs:
 
       - name: TypeScript type-check
         run: npm run check
-        # 事前に package.json に "check": "tsc --noEmit" を用意しておく
-
+        
       - name: ESLint
         run: npm run lint
-        # 事前に package.json に "lint": "eslint src --ext .js,.jsx,.ts,.tsx" を用意
-
+        
       # - name: Run tests
       #   run: npm test
 
