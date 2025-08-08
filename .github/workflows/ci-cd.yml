@@ -1,0 +1,68 @@
+name: CI/CD
+
+# プッシュとプルリクエスト、そして main マージ時に動く
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  # CI ジョブ: 型チェック・Lint・テスト・ビルド
+  build-test:
+    name: 🔧 Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeScript type-check
+        run: npm run check
+        # 事前に package.json に "check": "tsc --noEmit" を用意しておく
+
+      - name: ESLint
+        run: npm run lint
+        # 事前に package.json に "lint": "eslint src --ext .js,.jsx,.ts,.tsx" を用意
+
+      # - name: Run tests
+      #   run: npm test
+
+      - name: Build production bundle
+        run: npm run build
+
+      # ビルド成果物を後続ジョブやアーティファクトに渡す
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+    
+  # CD ジョブ: GitHub Pages へデプロイ
+  # deploy:
+  #   name: 🚀 Deploy to GitHub Pages
+  #   needs: build-test
+  #   if: github.ref == 'refs/heads/main'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Download build artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: dist
+
+  #     - name: Deploy to GitHub Pages
+  #       uses: peaceiris/actions-gh-pages@v4
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: ./dist
+  #         # Optional: custom domain を使うなら .env or with: cname: 'example.com'
