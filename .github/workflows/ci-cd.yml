@@ -3,11 +3,7 @@ name: CI/CD
 # プッシュとプルリクエスト、そして main マージ時に動く
 on:
   push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
 
 jobs:
   # CI ジョブ: 型チェック・Lint・テスト・ビルド
