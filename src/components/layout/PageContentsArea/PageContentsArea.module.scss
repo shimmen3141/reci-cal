@@ -1,9 +1,10 @@
 @use "@/styles" as *;
 
 .pageContentsArea {
-  padding-bottom: 1rem;
   background-color: $white;
+  color: $black;
   max-width: 800px;
+  min-height: calc(100vh - 112px);
   margin: 0 auto;
 
   .pageContents {
