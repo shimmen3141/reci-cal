@@ -1,6 +1,7 @@
 @use "@/styles" as *;
 
 .pageLayout {
-  width: 100%;
+  width: 100vw;
+  min-height: 100vh;
   background-color: $gray-100;
 }
