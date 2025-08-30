@@ -1,0 +1,16 @@
+@use "@/styles" as *;
+
+.pageContentsArea {
+  padding-bottom: 1rem;
+  background-color: $white;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .pageContents {
+    position: relative;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+}

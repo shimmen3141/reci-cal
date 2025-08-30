@@ -1,11 +1,13 @@
+import styles from './PageContentsArea.module.scss';
+
 type Props = {
   children: React.ReactNode;
 };
 
 export const PageContentsArea = ({ children }: Props) => {
   return (
-    <div>
-      <div>{children}</div>
+    <div className={styles.pageContentsArea}>
+      <div className={styles.pageContents}>{children}</div>
     </div>
   );
 };
