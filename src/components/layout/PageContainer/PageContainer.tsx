@@ -1,8 +1,8 @@
-export type PageContainerProps = {
+type Props = {
   children: React.ReactNode;
 };
 
-export const PageContainer = ({ children }: PageContainerProps) => {
+export const PageContainer = ({ children }: Props) => {
   return (
     <div>
       <div>{children}</div>
